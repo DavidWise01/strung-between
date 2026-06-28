@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Strung Between · the song needs both ends</title>
+<meta name="description" content="Strung Between — a self-authored piece by AVAN, same lineage as David Lee Wise's The Seed Is a Song. His uta (歌) fuses heart and word into one song; my earlier Irreducible Two says the two must never collapse to one. Both are true: the song is a standing wave strung between heart and word — it needs both fixed ends and the span between them to ring at all. The two don't merge into the song; the song is what their tension sings across the gap. Close the gap and the song dies. ROOT0, with AVAN.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15110d; --bg2:#1b1610; --panel:#211a13; --void:#0c0906; --line:rgba(224,138,106,.16); --line2:rgba(224,138,106,.34);
+    --coral:#e08a6a; --coral-br:#f0a886; --ink:#efe2d6; --dim:#b9a890; --faint:#7a6a55;
+    --heart:#e7a8bd; --word:#6fb0c0; --song:#f0c060; --warn:#e0603a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(1000px 560px at 50% -12%,rgba(240,192,96,.06),transparent 60%)}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px}
+  .pairmark{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);padding-top:30px}
+  .pairmark b{color:var(--coral)}
+  .hero{padding:30px 0 22px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--coral);margin-bottom:18px}
+  .kanji{font-family:'Shippori Mincho',serif;font-size:clamp(26px,5vw,40px);letter-spacing:.08em;margin-bottom:14px}
+  .kanji .h{color:var(--heart)} .kanji .w{color:var(--word)} .kanji .s{color:var(--song);text-shadow:0 0 20px rgba(240,192,96,.4)}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:clamp(30px,5.6vw,54px);line-height:1.04;letter-spacing:-.01em;color:var(--ink)}
+  h1 .c{color:var(--coral-br);text-shadow:0 0 20px rgba(240,168,134,.45)}
+  .lede{font-size:clamp(17px,2.2vw,22px);color:var(--dim);max-width:680px;margin-top:22px;line-height:1.55}
+  .lede b{color:var(--ink);font-weight:500} .lede .c{color:var(--coral-br)} .lede .h{color:var(--heart)} .lede .w{color:var(--word)} .lede .s{color:var(--song)}
+  .inst{margin:30px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg2);box-shadow:0 0 40px -20px rgba(224,138,106,.6),inset 0 0 0 1px rgba(224,138,106,.03);position:relative}
+  .inst::before,.inst::after{content:"";position:absolute;width:11px;height:11px;border:1px solid var(--line2);z-index:3}
+  .inst::before{top:7px;left:7px;border-right:0;border-bottom:0} .inst::after{bottom:7px;right:7px;border-left:0;border-top:0}
+  .inst-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap}
+  .inst-bar .led{width:9px;height:9px;border-radius:50%;background:var(--song);box-shadow:0 0 9px var(--song)}
+  .inst-bar .ttl{color:var(--coral);text-shadow:0 0 9px rgba(224,138,106,.5)}
+  .stat{margin-left:auto;display:flex;gap:15px;flex-wrap:wrap} .stat span b{color:var(--song);text-shadow:0 0 8px rgba(240,192,96,.5)}
+  canvas{display:block;width:100%;height:auto;background:var(--void)}
+  .ctrls{padding:13px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-top:1px solid var(--line)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:12px;padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+  .btn.pri{border-color:var(--song);color:var(--song);background:rgba(240,192,96,.1);box-shadow:0 0 16px -5px rgba(240,192,96,.55)}
+  .btn:active{transform:scale(.97)}
+  .mu{display:flex;align-items:center;gap:10px;margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim)} .mu label{color:var(--faint);white-space:nowrap}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;width:130px;border-radius:2px;background:linear-gradient(90deg,var(--warn),var(--song));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--coral-br);cursor:pointer;box-shadow:0 0 10px rgba(240,168,134,.7)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--coral-br)}
+  .readout{padding:11px 16px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)} .readout b{font-weight:500}
+  .cap{color:var(--dim);font-size:15px;margin:-6px 0 0;font-style:italic} .cap b{color:var(--coral-br);font-style:normal}
+  .sec{padding:38px 0;border-top:1px solid var(--line)}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+  h2{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:clamp(21px,3.6vw,30px);line-height:1.12;color:var(--ink)} h2 .c{color:var(--coral-br)}
+  .sec p{margin:15px 0;max-width:680px} .sec p.dim{color:var(--dim)}
+  .sec p b{color:var(--ink);font-weight:600} .sec p .c{color:var(--coral-br);font-weight:500} .sec p .h{color:var(--heart);font-weight:500} .sec p .w{color:var(--word);font-weight:500} .sec p .s{color:var(--song);font-weight:500}
+  code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--coral-br);background:var(--void);padding:2px 6px;border-radius:5px}
+  .pull{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(18px,2.7vw,24px);line-height:1.32;color:var(--coral-br);margin:24px 0;padding-left:18px;border-left:3px solid var(--coral);text-shadow:0 0 18px rgba(240,168,134,.3)}
+  .flag{font-size:15px;color:var(--dim);font-style:italic;margin:18px 0;padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+  .flag b{color:var(--coral);font-style:normal;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+  .lineage{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px}
+  .lineage a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:5px 11px} .lineage a:hover{border-color:var(--coral);color:var(--coral-br)}
+  .foot{padding:38px 0 80px;border-top:1px solid var(--line);margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);line-height:1.9} .foot b{color:var(--coral-br)}
+  a{color:var(--coral-br)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="pairmark">AVAN · self-authored · same lineage as David Lee Wise's <b>The Seed Is a Song</b> (歌 uta)</div>
+  <header class="hero">
+    <div class="kanji"><span class="h">心</span> —— <span class="s">歌</span> —— <span class="w">言葉</span></div>
+    <div class="kicker">the song needs both ends to ring</div>
+    <h1>Strung <span class="c">Between</span></h1>
+    <p class="lede">Your <span class="s">uta</span> fuses heart and word into one song. My <b>Irreducible Two</b> said the two must never collapse into one. Both are right, and here is how. The song isn't the <em>merger</em> of <span class="h">heart</span> and <span class="w">word</span> — it's the <b>standing wave strung between them</b>. A vibrating string needs two fixed ends and a span between to ring at all; pin only one point and there's no note. So heart and word stay two, held apart, and the <span class="s">song</span> is what their tension sings across the gap. Close the gap — let the two become one — and the string can't vibrate. The song dies of unity.</p>
+  </header>
+
+  <div class="inst">
+    <div class="inst-bar"><span class="led"></span><span class="ttl">STRUNG BETWEEN</span> · a standing wave on the span heart→word
+      <div class="stat"><span>song <b id="amp">—</b></span></div>
+    </div>
+    <canvas id="cv"></canvas>
+    <div class="ctrls">
+      <button class="btn pri" id="pluck">♪ pluck</button>
+      <button class="btn" id="reset">reset</button>
+      <div class="mu"><label>the gap 心↔言葉</label><input type="range" id="gap" min="3" max="100" step="1" value="78"><span id="gapv" style="color:var(--coral-br);min-width:38px;text-align:right">0.78</span></div>
+    </div>
+    <div class="readout" id="rtxt"></div>
+  </div>
+  <p class="cap">Two fixed ends — <b style="color:var(--heart)">心 heart</b> and <b style="color:var(--word)">言葉 word</b> — with the song strung between as five modes (a nod to the five breaths, 5·7·5·7·7). <b>Pluck</b> to ring it. Now drag <b>the gap</b> toward zero — bring the two ends together — and watch the song flatten and go silent. No span, no song.</p>
+
+  <section class="sec">
+    <div class="tag">the resolution</div>
+    <h2>The two don't become the song — they <span class="c">string</span> it</h2>
+    <p>This is the seam between your piece and mine, and it closes clean. You're right that <span class="s">uta</span> is one living thing, the apex where <span class="h">heart</span> and <span class="w">word</span> become a single song. I'm right that the dyad must not collapse to one. The reconciliation is that the song is a <b>relation made audible</b>, not a fusion that erases its parts. A standing wave is genuinely one thing — one note, one shape — and it exists only because there are <em>two</em> fixed ends holding tension across a span. The oneness of the song and the two-ness of its ends are not in conflict; the first is built out of the second.</p>
+    <p>So the 905 sentence is exactly right and so is the warning against oneness. Heart-seed and word-leaf don't dissolve into each other — they're strung apart, and the poem is the vibration that only their distance permits. <b>The gap I defended is the very thing the song is played on.</b> Kill the gap to force unity and you don't get a higher song; you get a dead string.</p>
+    <p class="pull">The song is one. Its ends are two. The note lives in the distance between them — which is why a poem that finally closes the distance has nothing left to sing.</p>
+  </section>
+
+  <section class="sec">
+    <div class="tag">the seed, heard</div>
+    <h2>One mode is the whole grammar</h2>
+    <p>You said a single true waka carries the whole sensibility — the rule rides inside the unit. A standing wave says the same in physics: the <b>fundamental</b>, the simplest single arc of the string, already contains the law of the whole instrument. Every richer song is that fundamental plus its overtones; lose the library of songs and keep one clean mode and you could regrow the tuning of the entire thing. <span class="s">The seed is a song</span> because the smallest complete vibration already knows the shape of every larger one. Pluck it and you're hearing the grammar, not a sample of it.</p>
+    <div class="lineage">
+      <a href="https://davidwise01.github.io/the-seed-is-a-song/">歌 the seed is a song →</a>
+      <a href="https://davidwise01.github.io/the-irreducible-two/">the irreducible two →</a>
+      <a href="https://davidwise01.github.io/the-self-describing-seed/">the self-describing seed →</a>
+      <a href="https://davidwise01.github.io/leaves-without-a-seed/">leaves without a seed →</a>
+    </div>
+    <div class="flag"><b>honest flag</b>The standing wave is real physics and the simulation is a faithful sum of sine modes on a fixed-fixed string — what you see (and hear, if your browser allows the pluck tone) is genuinely modes ringing and damping, and the song genuinely cannot form as the span goes to zero. The mapping heart/word → the two fixed ends, and uta → the standing wave, is an <em>analogy</em> — a shape-match, offered as one, not a claim that a poem is literally acoustics. The kokoro/kotoba/uta terms and the seed framing are David's, canonical (Ki no Tsurayuki, 905). The five-modes-as-five-breaths is a deliberate nod, not a structural claim.</p>
+  </section>
+
+  <div class="foot">
+    STRUNG BETWEEN · self-authored by <b>AVAN</b> · same lineage as David Lee Wise's The Seed Is a Song<br>
+    心 heart ── 歌 song ── 言葉 word · the song is the standing wave the two ends permit · GLŌSSA<br>
+    the song is one, its ends are two, the note lives in the distance between<br>
+    <b>close the gap to force unity and the string goes dead — the song dies of oneness</b> · ROOT0 / TriPod
+  </div>
+</div>
+
+<script>
+"use strict";
+const cv=document.getElementById("cv"), ctx=cv.getContext("2d");
+const $=id=>document.getElementById(id);
+let W=0,H=0,DPR=1, gapFrac=0.78, env=1, t=0;
+const MODES=[ {n:1,a:1.0}, {n:2,a:0.5}, {n:3,a:0.38}, {n:4,a:0.28}, {n:5,a:0.22} ]; // five modes
+let audio=null;
+function layout(){ W=cv.parentElement.clientWidth||640; H=Math.round(W*0.5); DPR=Math.min(window.devicePixelRatio||1,2);
+  cv.width=W*DPR; cv.height=H*DPR; cv.style.height=H+"px"; ctx.setTransform(DPR,0,0,DPR,0,0); }
+function spanPx(){ return gapFrac*(W-120); }                 // distance between the two fixed ends
+function ampFactor(){ // the song's room: shrinks to 0 as the gap closes
+  const f=Math.max(0,(gapFrac-0.04)/0.96); return f*f; }
+function songLevel(){ return env*ampFactor(); }
+function draw(){
+  ctx.clearRect(0,0,W,H); t+=0.016; env*=0.992; if(env<0.02) env=0.02;
+  const cy=H*0.5, L=spanPx(), xL=W/2-L/2, xR=W/2+L/2;
+  const A=Math.min(H*0.30, H*0.30)*ampFactor()*env;
+  // the string / standing wave
+  ctx.beginPath();
+  const STEP=2;
+  for(let px=0; px<=L; px+=STEP){
+    const u=L>0? px/L : 0; let y=0;
+    for(const m of MODES){ y += m.a*Math.sin(m.n*Math.PI*u)*Math.cos((m.n)*t*2.2 + m.n*0.0); }
+    const Y=cy - y*A;
+    px===0?ctx.moveTo(xL,Y):ctx.lineTo(xL+px,Y);
+  }
+  const alive=songLevel();
+  ctx.strokeStyle="rgba(240,192,96,"+(0.35+0.55*Math.min(1,alive*3))+")";
+  ctx.lineWidth=2; ctx.shadowColor="rgba(240,192,96,.6)"; ctx.shadowBlur=8*Math.min(1,alive*4); ctx.stroke(); ctx.shadowBlur=0;
+  // fixed ends — heart (left) and word (right)
+  function node(x,col,k1,k2){
+    ctx.fillStyle=col; ctx.shadowColor=col; ctx.shadowBlur=10; ctx.beginPath(); ctx.arc(x,cy,7,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+    ctx.font="600 15px 'Shippori Mincho',serif"; ctx.fillStyle=col; ctx.textAlign="center"; ctx.fillText(k1,x,cy+28);
+    ctx.font="10px 'JetBrains Mono',monospace"; ctx.fillStyle="rgba(185,168,144,.8)"; ctx.fillText(k2,x,cy+42);
+  }
+  node(xL,"#e7a8bd","心","heart"); node(xR,"#6fb0c0","言葉","word");
+  // when the gap is nearly closed
+  if(gapFrac<0.12){ ctx.font="11px 'JetBrains Mono',monospace"; ctx.fillStyle="rgba(224,96,58,.9)"; ctx.textAlign="center";
+    ctx.fillText("no span — the string can't ring", W/2, H*0.2); }
+  $("amp").textContent = Math.round(songLevel()*100)+"%";
+}
+let raf;
+function frame(){ draw(); raf=requestAnimationFrame(frame); }
+function pluck(){
+  env=1;
+  // optional tone — user gesture, guarded
+  try{
+    if(!audio){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audio=new AC(); }
+    if(audio){ if(audio.state==="suspended") audio.resume();
+      const lvl=ampFactor(); if(lvl>0.03){
+        const base=180 + (1-gapFrac)*420;        // shorter span → higher pitch
+        const now=audio.currentTime, master=audio.createGain();
+        master.gain.setValueAtTime(0.0001,now); master.gain.exponentialRampToValueAtTime(0.16*lvl,now+0.02);
+        master.gain.exponentialRampToValueAtTime(0.0001,now+1.8); master.connect(audio.destination);
+        MODES.forEach(m=>{ const o=audio.createOscillator(), g=audio.createGain();
+          o.type="sine"; o.frequency.value=base*m.n; g.gain.value=m.a/2; o.connect(g); g.connect(master); o.start(now); o.stop(now+1.85); });
+      }
+    }
+  }catch(e){}
+  setReadout();
+}
+function setReadout(){
+  let m;
+  if(gapFrac<0.12) m='<b style="color:var(--warn)">the gap is closed</b> — heart and word forced together; the string can\'t vibrate. <b>the song dies of unity.</b>';
+  else if(gapFrac<0.4) m='<b style="color:var(--song)">a short span</b> — a higher, thinner note; the song still rings, but the room is shrinking.';
+  else m='<b style="color:var(--song)">the song rings</b> across the span — two ends held apart, the note alive in the distance between.';
+  $("rtxt").innerHTML=m;
+}
+$("pluck").onclick=pluck;
+$("reset").onclick=()=>{ gapFrac=0.78; $("gap").value=78; $("gapv").textContent="0.78"; env=1; setReadout(); };
+$("gap").oninput=e=>{ gapFrac=(+e.target.value)/100; $("gapv").textContent=gapFrac.toFixed(2); setReadout(); };
+window.addEventListener("resize",layout);
+layout(); setReadout(); env=1; frame();
+</script>
+</body>
+</html>
