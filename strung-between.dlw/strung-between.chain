@@ -4,6 +4,6 @@ slug  : strung-between
 seal  : c0118fd2b673b4fb28678e7e57441ef4f4bcef46b348b1ef2279b678cd8351a2
 prev  : e87ef4f67ec3fb162870b4e0ade39f2e37c2904a7ee8d06aba2e7d0f6e16489a
 link  : b6c52a0f088f50eed8d12cd1650d0107d121fb09c62ed5bf228f847a540f60b3
-head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+head  : 13f9ace173ef2e60af38912ba329b4afcb5a38b84a0e4495e8d30327f8c99cc2
 
 — the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
